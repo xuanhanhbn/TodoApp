@@ -9,11 +9,11 @@ const HomeSceen = () => {
       <h1 className='text-info text-center'>To Do App</h1>
       <Card>
         <Card.Header className='text-center'>
-          A To Do List 
+           Add your todo-items
         </Card.Header>
         <TodoListForm />
       </Card>
-      <h1 className='text-info text-center'>List</h1>
+      <h1 className='text-info text-center'>A To-Do List to Organize Your Work & Life</h1>
       <TodoListList />
     </>
     

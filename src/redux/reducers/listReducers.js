@@ -1,4 +1,4 @@
-import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE } from '../../constants/ListConstants';
+import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_UPDATE_TODO} from '../../constants/ListConstants';
 
 export const listReducer = (state = { todoList: [], repeat: false }, action) => {
   switch (action.type) {
@@ -33,11 +33,17 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
       }
 
     case LIST_REMOVE_DONE:
-      const uncompleteNote = state.todoList.find(x => x.name === action.payload.name)
+      const unCompleteNote = state.todoList.find(x => x.name === action.payload.name)
       return {
         ...state,
-        todoList: state.todoList.map((x) => x.name === uncompleteNote.name ? action.payload : x) //replace that todoList.complete to true
+        todoList: state.todoList.map((x) => x.name === unCompleteNote.name ? action.payload : x) //replace that todoList.complete to true
       }
+    case LIST_DELETE_ALL:
+            return {...state,
+              todoList:[]
+            };
+    case LIST_UPDATE_TODO:
+      return state;
     default:
       return state;
   }
