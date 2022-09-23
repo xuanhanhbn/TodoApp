@@ -50,8 +50,8 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
             };
     case LIST_EDIT_TODO:
       return {...state, text:state.todoList[action.payload]};
-    case ADD_TEXT:
-      return {...state, text:actions.payload};
+    // case ADD_TEXT:
+    //   return {...state, text:actions.payload};
     default:
       return state;
   }

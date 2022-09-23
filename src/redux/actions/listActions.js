@@ -81,7 +81,7 @@ export const editTodo = (name) => async (dispatch, getState)=>{
   })
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
-export const addText = value => ({
-  type: ADD_TEXT,
-  payload: value,
-})
+// export const addText = value => ({
+//   type: ADD_TEXT,
+//   payload: value,
+// })
