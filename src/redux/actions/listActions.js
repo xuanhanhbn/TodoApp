@@ -35,7 +35,7 @@ export const addDone = (name) => async (dispatch, getState) => {
       complete: true
     }
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
+  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList) || [])
 }
 
 export const removeDone = (name) => async (dispatch, getState) => {
@@ -46,9 +46,9 @@ export const removeDone = (name) => async (dispatch, getState) => {
       complete: false
     }
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
+  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList) || [])
 }
-//  add 
+//  add
 export const handleEditSubmit = (name) => async (dispatch, getState) => {
   dispatch({
     type: LIST_UPDATE_TODO,

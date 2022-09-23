@@ -4,14 +4,20 @@ import { useDispatch } from 'react-redux';
 import { addList } from '../redux/actions/listActions';
 const TodoListForm = () => {
   const dispatch = useDispatch();
-  const [list, setList] = useState('');
+  const [list, setList] = useState([
+    {
+
+      name: 'a',
+      
+    }
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addList(list));
     setList('');
   };
-  
+
   return (
     <Form className='mx-2 my-2' onSubmit={submitHandler}>
       <Form.Group controlId='inputList'>
