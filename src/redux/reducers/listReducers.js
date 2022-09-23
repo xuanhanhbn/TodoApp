@@ -1,8 +1,14 @@
-import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_UPDATE_TODO} from '../../constants/ListConstants';
+import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_EDIT_TODO} from '../../constants/ListConstants';
 
+
+const innitState = {
+  todoList: [],
+  text: ''
+}
 export const listReducer = (state = { todoList: [], repeat: false }, action) => {
   switch (action.type) {
     case LIST_ADD:
+
       const newList = action.payload;
       const checkName = state.todoList.find(x => x.name === action.payload.name)
       // console.log(checkName)
@@ -42,8 +48,10 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
             return {...state,
               todoList:[]
             };
-    case LIST_UPDATE_TODO:
-      return state;
+    case LIST_EDIT_TODO:
+      return {...state, text:state.todoList[action.payload]};
+    case ADD_TEXT:
+      return {...state, text:actions.payload};
     default:
       return state;
   }

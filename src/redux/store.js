@@ -7,9 +7,16 @@ const reducer = combineReducers({
   todoItems: listReducer,
 });
 
-const todoItemsFromStorage = localStorage.getItem('listItems')
-  ? JSON.parse(localStorage.getItem('listItems'))
-  : [];
+const todoItemsFromStorage = [
+  {
+    name: 'test',
+    complete: false,
+  },
+  {
+    name: 'test2',
+    complete: false,
+  },
+];
 
 const middleware = [thunk];
 

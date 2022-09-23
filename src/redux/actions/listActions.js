@@ -4,7 +4,8 @@ import {
   LIST_ADD_DONE,
   LIST_REMOVE_DONE,
   LIST_UPDATE_TODO,
-  LIST_DELETE_ALL
+  LIST_DELETE_ALL,
+  LIST_EDIT_TODO,
 } from '../../constants/ListConstants';
 
 export const addList = (name) => async (dispatch, getState) => {
@@ -69,9 +70,10 @@ export const deleteAll = (name) =>async (dispatch, getState)=>{
   })
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
-export const updateTodo = (name) =>async (dispatch, getState)=>{
+
+export const editTodo = (name) => async (dispatch, getState)=>{
   dispatch ({
-      type: LIST_UPDATE_TODO,
+      type: LIST_EDIT_TODO,
       payload: {
         name: name,
         complete: false
@@ -79,3 +81,7 @@ export const updateTodo = (name) =>async (dispatch, getState)=>{
   })
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
+export const addText = value => ({
+  type: ADD_TEXT,
+  payload: value,
+})
