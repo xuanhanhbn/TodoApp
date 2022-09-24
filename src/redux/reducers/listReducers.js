@@ -1,3 +1,4 @@
+
 import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_EDIT_TODO} from '../../constants/ListConstants';
 
 export const listReducer = (state = { todoList: [], repeat: false }, action) => {
@@ -5,7 +6,6 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
     case LIST_ADD:
       const newList = action.payload;
       const checkName = state.todoList.find(x => x.name === action.payload.name)
-      // console.log(checkName)
       if(!checkName) {
         return {
           ...state,

@@ -24,10 +24,10 @@ const HomeSceen = () => {
     <>
       <h1 className='text-info text-center'>To Do App</h1>
       <Card>
-        <TodoListForm editFormVisibility={editFormVisibility} editTodo = {editTodo} cancelUpdate = {cancelUpdate} />
+        <TodoListForm setEditFormVisibility = {setEditFormVisibility} editFormVisibility={editFormVisibility} editTodo = {editTodo} cancelUpdate = {cancelUpdate} />
       </Card>
 
-      <h1 className='text-info text-center'>A To-Do List to Organize Your Work &amp;	 Life</h1>
+      <h1 className='text-info text-center'>A To-Do List to Organize Your Work &amp;	Life</h1>
       <TodoListList  handleEditClick={handleEditClick} editFormVisibility={editFormVisibility} />
     </>
 

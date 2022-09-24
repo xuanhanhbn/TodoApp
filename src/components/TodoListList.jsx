@@ -34,7 +34,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
       <>
         {repeat && <Message variant="danger">This note is already added</Message>}
         <ListGroup >
-          {todoList.map((data) => (
+          {todoList.map((data,index) => (
             <ListGroup.Item
             className='mb-xxl-1'
               variant={data.complete === true ? 'success' : 'primary'}
@@ -42,7 +42,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
 
             >
               <Row >
-                  <Col md={9} xs={9} style={{overflow:'hidden'}}>{data.id} - {data.name} </Col>
+                  <Col md={9} xs={9} style={{overflow:'hidden'}}>{index + 1} - {data.name} </Col>
 
                 {editFormVisibility === false && (
                   <>

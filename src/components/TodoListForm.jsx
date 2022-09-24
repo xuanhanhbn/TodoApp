@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addList, handleUpdateEditSubmit } from '../redux/actions/listActions';
 
-const TodoListForm = ({editFormVisibility, editTodo, cancelUpdate}) => {
+const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cancelUpdate}) => {
 
 
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ const TodoListForm = ({editFormVisibility, editTodo, cancelUpdate}) => {
   },[editTodo])
 
   const editSubmit = (e )=> {
+    setEditFormVisibility(false);
     e.preventDefault();
     const todoListValue = {
       ...editTodo,
