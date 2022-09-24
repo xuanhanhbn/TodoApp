@@ -43,10 +43,19 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
             return {...state,
               todoList:[]
             };
+
     case LIST_EDIT_TODO:
-      return {...state, text:state.todoList[action.payload]};
-    // case ADD_TEXT:
-    //   return {...state, text:actions.payload};
+      let data = action.payload;
+      const updatedArray = [];
+      state.map((item) => {
+        if(item.name === data.name){
+          item.name = data.name;
+          item.complete = data.complete;
+        }
+        updatedArray.push(item);
+      })
+      return updatedArray;
+
     default:
       return state;
   }

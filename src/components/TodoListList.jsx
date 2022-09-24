@@ -42,38 +42,41 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
 
             >
               <Row >
-                <Col md={9} xs={9} style={{overflow:'hidden'}}>{index + 1} - {list.name} </Col>
-                <Col md={1} xs={1}
-                     style={{display:'flex',justifyContent: 'flex-end'}}>
-                  {list.complete === true ? (
-                    <Button
-                      variant='dark'
-                      onClick={() => handleNotComplete(list.name)}
-                    >
-                      <i className='fas fa-check'></i>
-                    </Button>
-                  ) : (
-                    <Button
-                      variant='primary'
-                      onClick={() => handleComplete(list.name)}
-                    >
-                      <i className='fas fa-check'></i>
-                    </Button>
-                  )}
-                </Col>
+                  <Col md={9} xs={9} style={{overflow:'hidden'}}>{index + 1} - {list.name} </Col>
 
-                <Col md={1} xs={1}
-                     style={{display:'flex',justifyContent: 'flex-end'}}>
-                  {/* update item  */}
-                  <Button
-                    variant='warning'
-                    onClick={() => handleEditClick()}
-                  >
-                   <i className="fa-regular fa-pen-to-square"></i>
-                  </Button>
-                </Col>
+                {editFormVisibility === false && (
+                  <>
+                      <Col md={1} xs={1}
+                      style={{display:'flex',justifyContent: 'flex-end'}}>
+                    {list.complete === true ? (
+                      <Button
+                        variant='dark'
+                        onClick={() => handleNotComplete(list.name)}
+                      >
+                        <i className='fas fa-check'></i>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant='primary'
+                        onClick={() => handleComplete(list.name)}
+                      >
+                        <i className='fas fa-check'></i>
+                      </Button>
+                    )}
+                  </Col>
 
-                <Col md={1} xs={1}
+                  <Col md={1} xs={1}
+                      style={{display:'flex',justifyContent: 'flex-end'}}>
+                    {/* update item  */}
+                    <Button
+                      variant='warning'
+                      onClick={() => handleEditClick(list)}
+                    >
+                    <i className="fa-regular fa-pen-to-square"></i>
+                    </Button>
+                  </Col>
+
+                  <Col md={1} xs={1}
                      style={{display:'flex',justifyContent: 'flex-end'}}>
                   {/* delete item  */}
                   <Button
@@ -82,8 +85,8 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
                   >
                     <i className='fas fa-trash'></i>
                   </Button>
-                </Col>
-
+                </Col></>
+                )}
               </Row>
             </ListGroup.Item>
           ))}

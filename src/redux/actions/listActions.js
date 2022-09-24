@@ -71,12 +71,12 @@ export const deleteAll = (name) =>async (dispatch, getState)=>{
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
 
-export const editTodo = (name) => async (dispatch, getState)=>{
+export const handleUpdateEditSubmit = (name) =>async (dispatch, getState)=>{
   dispatch ({
       type: LIST_EDIT_TODO,
       payload: {
         name: name,
-        complete: false
+      complete: false
       }
   })
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
