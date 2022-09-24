@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Row, Col, Button, Card } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addList, handleUpdateEditSubmit } from '../redux/actions/listActions';
 
@@ -7,23 +7,37 @@ const TodoListForm = ({editFormVisibility, editTodo, cancelUpdate}) => {
 
 
   const dispatch = useDispatch();
-  const [list, setList] = useState();
+  // const [list, setList] = useState();
+  const [item, setItem] = useState();
 
   const submitHandler = (e) => {
+    const todoListValue = {
+      id: Math.floor(Math.random() * 10001),
+      name: item,
+      complete: false,
+    }
     e.preventDefault();
-    dispatch(addList(list));
-    setList('');
+    dispatch(addList(todoListValue));
+    setItem('');
   };
 
-  const [editValue, setEditValue] = useState('');
+  const [editValue, setEditValue] = useState();
+
   useEffect(()=> {
+    if(!editTodo) {
+      return;
+    }
     setEditValue(editTodo.name);
   },[editTodo])
 
   const editSubmit = (e )=> {
     e.preventDefault();
-    dispatch(handleUpdateEditSubmit(list));
-    setEditValue('')
+    const todoListValue = {
+      ...editTodo,
+      name: editValue,
+    }
+    dispatch(handleUpdateEditSubmit(todoListValue));
+    // setEditValue('')
   }
 
   return (
@@ -39,8 +53,8 @@ const TodoListForm = ({editFormVisibility, editTodo, cancelUpdate}) => {
                >
                  <Form.Control
                    type='text'
-                   value={editValue}
-                   onChange={(e) => setEditValue(e.target.value)}
+                   value={item}
+                   onChange={(e) => setItem(e.target.value)}
                    placeholder='Enter list'
                    required
                  />

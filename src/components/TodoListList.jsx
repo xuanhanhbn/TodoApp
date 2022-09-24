@@ -8,12 +8,12 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
 
 
   const data = useSelector((state) => state.todoItems);
-  // console.log(data)
+
   const dispatch = useDispatch();
   const { todoList, repeat } = data;
   // console.log(repeat)
-  const handleDelete = (item) => {
-    dispatch(removeList(item));
+  const handleDelete = (id) => {
+    dispatch(removeList(id));
   };
 
   const handleComplete = (item) => {
@@ -34,31 +34,31 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
       <>
         {repeat && <Message variant="danger">This note is already added</Message>}
         <ListGroup >
-          {todoList.map((list, index) => (
+          {todoList.map((data) => (
             <ListGroup.Item
             className='mb-xxl-1'
-              variant={list.complete === true ? 'success' : 'primary'}
-              key={list.name}
+              variant={data.complete === true ? 'success' : 'primary'}
+              key={data.id}
 
             >
               <Row >
-                  <Col md={9} xs={9} style={{overflow:'hidden'}}>{index + 1} - {list.name} </Col>
+                  <Col md={9} xs={9} style={{overflow:'hidden'}}>{data.id} - {data.name} </Col>
 
                 {editFormVisibility === false && (
                   <>
                       <Col md={1} xs={1}
                       style={{display:'flex',justifyContent: 'flex-end'}}>
-                    {list.complete === true ? (
+                    {data.complete === true ? (
                       <Button
                         variant='dark'
-                        onClick={() => handleNotComplete(list.name)}
+                        onClick={() => handleNotComplete(data.name)}
                       >
                         <i className='fas fa-check'></i>
                       </Button>
                     ) : (
                       <Button
                         variant='primary'
-                        onClick={() => handleComplete(list.name)}
+                        onClick={() => handleComplete(data.name)}
                       >
                         <i className='fas fa-check'></i>
                       </Button>
@@ -70,7 +70,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
                     {/* update item  */}
                     <Button
                       variant='warning'
-                      onClick={() => handleEditClick(list)}
+                      onClick={() => handleEditClick(data)}
                     >
                     <i className="fa-regular fa-pen-to-square"></i>
                     </Button>
@@ -81,7 +81,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
                   {/* delete item  */}
                   <Button
                     variant='dark'
-                    onClick={() => handleDelete(list.name)}
+                    onClick={() => handleDelete(data.id)}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>

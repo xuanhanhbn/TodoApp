@@ -9,10 +9,12 @@ const reducer = combineReducers({
 
 const todoItemsFromStorage = [
   {
+    id: 1,
     name: 'test',
     complete: false,
   },
   {
+    id: 2,
     name: 'test2',
     complete: false,
   },

@@ -8,22 +8,19 @@ import {
   LIST_EDIT_TODO,
 } from '../../constants/ListConstants';
 
-export const addList = (name) => async (dispatch, getState) => {
+export const addList = (data) => async (dispatch, getState) => {
   dispatch({
     type: LIST_ADD,
-    payload: {
-      name: name,
-      complete: false
-    }
+    payload: data
   })
   // save to local storage as listItems
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 };
 
-export const removeList = (name) => async (dispatch, getState) => {
+export const removeList = (id) => async (dispatch, getState) => {
   dispatch({
     type: LIST_REMOVE,
-    payload: name
+    payload: id
   })
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
@@ -71,13 +68,11 @@ export const deleteAll = (name) =>async (dispatch, getState)=>{
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
 
-export const handleUpdateEditSubmit = (name) =>async (dispatch, getState)=>{
+export const handleUpdateEditSubmit = (data) => async (dispatch, getState)=>{
+  
   dispatch ({
       type: LIST_EDIT_TODO,
-      payload: {
-        name: name,
-      complete: false
-      }
+      payload: data
   })
   localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }

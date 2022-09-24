@@ -3,7 +3,6 @@ import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL
 export const listReducer = (state = { todoList: [], repeat: false }, action) => {
   switch (action.type) {
     case LIST_ADD:
-
       const newList = action.payload;
       const checkName = state.todoList.find(x => x.name === action.payload.name)
       // console.log(checkName)
@@ -23,7 +22,7 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
     case LIST_REMOVE:
       return {
         ...state,
-        todoList: state.todoList.filter((x) => x.name !== action.payload), //remove that one from the list
+        todoList: state.todoList.filter((x) => x.id !== action.payload), //remove that one from the list
       };
 
     case LIST_ADD_DONE:
@@ -40,21 +39,23 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
         todoList: state.todoList.map((x) => x.name === unCompleteNote.name ? action.payload : x) //replace that todoList.complete to true
       }
     case LIST_DELETE_ALL:
-            return {...state,
-              todoList:[]
-            };
+      return {
+        ...state,
+        todoList:[]
+      };
 
-    case LIST_EDIT_TODO:
-      let data = action.payload;
-      const updatedArray = [];
-      state.map((item) => {
-        if(item.name === data.name){
-          item.name = data.name;
-          item.complete = data.complete;
+    case LIST_EDIT_TODO: {
+      const newTodoList = state.todoList.map((data) => {
+        if(data.id === action.payload.id) {
+          return action.payload;
         }
-        updatedArray.push(item);
+        return data;
       })
-      return updatedArray;
+      return {
+        ...state,
+        todoList:newTodoList,
+      }
+    }
 
     default:
       return state;

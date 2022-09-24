@@ -7,12 +7,15 @@ const HomeSceen = () => {
 
   const [editFormVisibility, setEditFormVisibility]=useState(false);
 
-  const [editTodo, setEditTodo] = useState('');
+  const [editTodo, setEditTodo] = useState();
 
-  const handleEditClick=(list)=>{
+  const handleEditClick=(data)=>{
     setEditFormVisibility(true);
-    setEditTodo(list);
+    setEditTodo(data);
+    console.log(data);
   }
+
+
   const cancelUpdate = () => {
     setEditFormVisibility(false);
   }
