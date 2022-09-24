@@ -1,10 +1,5 @@
 import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_EDIT_TODO} from '../../constants/ListConstants';
 
-
-const innitState = {
-  todoList: [],
-  text: ''
-}
 export const listReducer = (state = { todoList: [], repeat: false }, action) => {
   switch (action.type) {
     case LIST_ADD:

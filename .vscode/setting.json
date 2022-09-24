@@ -1,8 +1,4 @@
 {
   "editor.formatOnSave": true,
-  "editor.tabSize": 2,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true
-  },
-  "eslint.enable": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

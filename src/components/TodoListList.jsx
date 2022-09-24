@@ -4,7 +4,7 @@ import { ListGroup, Button, Row, Col } from 'react-bootstrap';
 import { removeList, addDone, removeDone,deleteAll } from '../redux/actions/listActions';
 import Message from './Message';
 
-const TodoListList = () => {
+const TodoListList = ({handleEditClick, editFormVisibility}) => {
 
 
   const data = useSelector((state) => state.todoItems);
@@ -34,7 +34,7 @@ const TodoListList = () => {
       <>
         {repeat && <Message variant="danger">This note is already added</Message>}
         <ListGroup >
-          {todoList.map((list) => (
+          {todoList.map((list, index) => (
             <ListGroup.Item
             className='mb-xxl-1'
               variant={list.complete === true ? 'success' : 'primary'}
@@ -42,7 +42,7 @@ const TodoListList = () => {
 
             >
               <Row >
-                <Col md={9} xs={9} style={{overflow:'hidden'}}>{list.name} </Col>
+                <Col md={9} xs={9} style={{overflow:'hidden'}}>{index + 1} - {list.name} </Col>
                 <Col md={1} xs={1}
                      style={{display:'flex',justifyContent: 'flex-end'}}>
                   {list.complete === true ? (
@@ -67,7 +67,7 @@ const TodoListList = () => {
                   {/* update item  */}
                   <Button
                     variant='warning'
-                    // onClick={() => }
+                    onClick={() => handleEditClick()}
                   >
                    <i className="fa-regular fa-pen-to-square"></i>
                   </Button>
