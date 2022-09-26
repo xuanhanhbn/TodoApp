@@ -42,30 +42,30 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
 
             >
               <Row >
-                  <Col md={9} xs={9} style={{overflow:'hidden'}}>{index + 1} - {data.name} </Col>
+                  <Col lg={9} md={6} xs={6} style={{overflow:'hidden'}}>{index + 1} - {data.name} </Col>
 
                 {editFormVisibility === false && (
                   <>
-                      <Col md={1} xs={1}
+                  <Col lg={1} md={2} xs={2}
                       style={{display:'flex',justifyContent: 'flex-end'}}>
                     {data.complete === true ? (
                       <Button
                         variant='dark'
                         onClick={() => handleNotComplete(data.name)}
                       >
-                        <i className='fas fa-check'></i>
+                       <i className="fa-solid fa-check"></i>
                       </Button>
                     ) : (
                       <Button
                         variant='primary'
                         onClick={() => handleComplete(data.name)}
                       >
-                        <i className='fas fa-check'></i>
+                        <i className="fa-solid fa-xmark"></i>
                       </Button>
                     )}
                   </Col>
 
-                  <Col md={1} xs={1}
+                  <Col lg={1} md={2} xs={2}
                       style={{display:'flex',justifyContent: 'flex-end'}}>
                     {/* update item  */}
                     <Button
@@ -76,7 +76,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
                     </Button>
                   </Col>
 
-                  <Col md={1} xs={1}
+                  <Col lg={1} md={2} xs={2}
                      style={{display:'flex',justifyContent: 'flex-end'}}>
                   {/* delete item  */}
                   <Button
@@ -85,7 +85,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
                   >
                     <i className='fas fa-trash'></i>
                   </Button>
-                </Col></>
+                  </Col></>
                 )}
               </Row>
             </ListGroup.Item>
@@ -93,12 +93,15 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
         </ListGroup>
         {/* deleteAll  */}
         {todoList.length > 1 &&(
-          <div>
+          <div className='d-grid gap-2'>
             <Button
+            style={{marginTop:'20px'}}
+              className='btn btn-primary'
               variant='danger'
               onClick={() => handleDeleteAll()}
             >
-              <i className='fas fa-trash'></i> Delete all
+              <i style={{paddingRight:'8px'}} className='fas fa-trash'></i>
+               Delete all
           </Button>
           </div>
         )}

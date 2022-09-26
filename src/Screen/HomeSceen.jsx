@@ -3,7 +3,7 @@ import { Card} from 'react-bootstrap'
 import TodoListForm from '../components/TodoListForm'
 import TodoListList from '../components/TodoListList'
 
-const HomeSceen = () => {
+const HomeScreen = () => {
 
   const [editFormVisibility, setEditFormVisibility]=useState(false);
 
@@ -12,7 +12,6 @@ const HomeSceen = () => {
   const handleEditClick=(data)=>{
     setEditFormVisibility(true);
     setEditTodo(data);
-    console.log(data);
   }
 
 
@@ -26,15 +25,16 @@ const HomeSceen = () => {
       <Card>
         <TodoListForm setEditFormVisibility = {setEditFormVisibility} editFormVisibility={editFormVisibility} editTodo = {editTodo} cancelUpdate = {cancelUpdate} />
       </Card>
-
-      <h1 className='text-info text-center'>A To-Do List to Organize Your Work &amp;	Life</h1>
+      <h1 style={{
+        padding:'20px 0'
+      }} className='text-info text-center'>A ToDo List to Organize Your Work &amp;	Life</h1>
       <TodoListList  handleEditClick={handleEditClick} editFormVisibility={editFormVisibility} />
     </>
 
   )
 }
 
-export default HomeSceen;
+export default HomeScreen;
 
 // HomeSceen = App.js;
 // Form = Form;

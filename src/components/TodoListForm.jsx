@@ -38,16 +38,15 @@ const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cance
       name: editValue,
     }
     dispatch(handleUpdateEditSubmit(todoListValue));
-    // setEditValue('')
   }
 
   return (
     <>
     {editFormVisibility === false ? (
-           <Form className='mx-2 my-2' onSubmit={submitHandler}>
+           <Form  className='mx-2 my-2' onSubmit={submitHandler}>
            <Form.Group controlId='inputList'>
-             <Row>
-             <div className='text-center' >
+             <Row >
+             <div style={{paddingBottom: '16px'}} className='text-center' >
                Add your todo-items
             </div>
                <Col md={8}
@@ -71,7 +70,7 @@ const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cance
       <Form className='mx-2 my-2' onSubmit={editSubmit}>
       <Form.Group controlId='inputList'>
         <Row>
-          <div className='text-center'>
+          <div style={{paddingBottom: '16px'}} className='text-center'>
                Edit your todo-items
           </div>
           <Col md={8}
