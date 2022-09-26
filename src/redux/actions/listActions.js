@@ -6,15 +6,22 @@ import {
   LIST_UPDATE_TODO,
   LIST_DELETE_ALL,
   LIST_EDIT_TODO,
+  LIST_ALL,
 } from '../../constants/ListConstants';
 
 export const addList = (data) => async (dispatch, getState) => {
+  console.log("data",data)
   dispatch({
     type: LIST_ADD,
     payload: data
   })
   // save to local storage as listItems
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
+};
+export const addAll = (data) => async (dispatch, getState) => {
+  dispatch({
+    type: LIST_ALL,
+    payload: data
+  })
 };
 
 export const removeList = (id) => async (dispatch, getState) => {
@@ -22,59 +29,53 @@ export const removeList = (id) => async (dispatch, getState) => {
     type: LIST_REMOVE,
     payload: id
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
 
-export const addDone = (name) => async (dispatch, getState) => {
+export const addDone = (title) => async (dispatch, getState) => {
   dispatch({
     type: LIST_ADD_DONE,
     payload: {
-      name: name,
+      title: title,
       complete: true
     }
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList) || [])
 }
 
-export const removeDone = (name) => async (dispatch, getState) => {
+export const removeDone = (title) => async (dispatch, getState) => {
   dispatch({
     type: LIST_REMOVE_DONE,
     payload: {
-      name: name,
+      title: title,
       complete: false
     }
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList) || [])
 }
 //  add
-export const handleEditSubmit = (name) => async (dispatch, getState) => {
+export const handleEditSubmit = (title) => async (dispatch, getState) => {
   dispatch({
     type: LIST_UPDATE_TODO,
     payload: {
-      name: name,
+      title: title,
       complete: false
     }
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
-export const deleteAll = (name) =>async (dispatch, getState)=>{
+export const deleteAll = (title) =>async (dispatch, getState)=>{
   dispatch ({
       type: LIST_DELETE_ALL,
       payload: {
-        name: name,
+        title: title,
       complete: false
       }
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
 
 export const handleUpdateEditSubmit = (data) => async (dispatch, getState)=>{
-  
+
   dispatch ({
       type: LIST_EDIT_TODO,
       payload: data
   })
-  localStorage.setItem('listItems', JSON.stringify(getState().todoItems.todoList))
 }
 // export const addText = value => ({
 //   type: ADD_TEXT,

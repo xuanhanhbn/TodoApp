@@ -3,46 +3,45 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addList, handleUpdateEditSubmit } from '../redux/actions/listActions';
 
-const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cancelUpdate}) => {
+const TodoListForm = ({ setEditFormVisibility, editFormVisibility, editTodo, cancelUpdate }) => {
+    const dispatch = useDispatch();
+    // const [list, setList] = useState();
+    const [item, setItem] = useState();
 
+    const submitHandler = (e) => {
+        const todoListValue = {
+            id: Math.floor(Math.random() * 10000000001),
+            title: item,
+            complete: false,
+        };
+        e.preventDefault();
+        dispatch(addList(todoListValue));
+        setItem('');
+    };
 
-  const dispatch = useDispatch();
-  // const [list, setList] = useState();
-  const [item, setItem] = useState();
+    const [editValue, setEditValue] = useState();
 
-  const submitHandler = (e) => {
-    const todoListValue = {
-      id: Math.floor(Math.random() * 10001),
-      name: item,
-      complete: false,
-    }
-    e.preventDefault();
-    dispatch(addList(todoListValue));
-    setItem('');
-  };
+    useEffect(() => {
+        if (!editTodo) {
+            return;
+        }
+        setEditValue(editTodo.title);
+    }, [editTodo]);
 
-  const [editValue, setEditValue] = useState();
+    const editSubmit = (e) => {
+        setEditFormVisibility(false);
+        e.preventDefault();
+        const todoListValue = {
+            ...editTodo,
+            title: editValue,
+        };
+        dispatch(handleUpdateEditSubmit(todoListValue));
+        // setEditValue('')
+    };
 
-  useEffect(()=> {
-    if(!editTodo) {
-      return;
-    }
-    setEditValue(editTodo.name);
-  },[editTodo])
-
-  const editSubmit = (e )=> {
-    setEditFormVisibility(false);
-    e.preventDefault();
-    const todoListValue = {
-      ...editTodo,
-      name: editValue,
-    }
-    dispatch(handleUpdateEditSubmit(todoListValue));
-  }
-
-  return (
-    <>
-    {editFormVisibility === false ? (
+    return (
+        <>
+        {editFormVisibility === false ? (
            <Form  className='mx-2 my-2' onSubmit={submitHandler}>
            <Form.Group controlId='inputList'>
              <Row >
@@ -95,9 +94,8 @@ const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cance
       </Form>
     )}
 
-    </>
-
-  );
+        </>
+    );
 };
 
 export default TodoListForm;

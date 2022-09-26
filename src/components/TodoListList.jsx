@@ -1,37 +1,41 @@
-import {React} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ListGroup, Button, Row, Col } from 'react-bootstrap';
-import { removeList, addDone, removeDone,deleteAll } from '../redux/actions/listActions';
+import { React, useEffect } from 'react';
+import { Button, Col, ListGroup, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAll, addDone, deleteAll, removeDone, removeList } from '../redux/actions/listActions';
 import Message from './Message';
 
-const TodoListList = ({handleEditClick, editFormVisibility}) => {
+const TodoList = ({ handleEditClick, editFormVisibility }) => {
+    const data = useSelector((state) => state.todoItems);
 
+    const dispatch = useDispatch();
+    const { todoList, repeat } = data;
+    console.log(todoList);
+    const handleDelete = (id) => {
+        dispatch(removeList(id));
+    };
 
-  const data = useSelector((state) => state.todoItems);
+    const handleComplete = (item) => {
+        dispatch(addDone(item));
+    };
 
-  const dispatch = useDispatch();
-  const { todoList, repeat } = data;
-  // console.log(repeat)
-  const handleDelete = (id) => {
-    dispatch(removeList(id));
-  };
-
-  const handleComplete = (item) => {
-    dispatch(addDone(item));
-  };
-
-  const handleNotComplete = (item) => {
-    dispatch(removeDone(item))
-  };
-  const handleDeleteAll = (item) => {
-    dispatch(deleteAll(item))
-  };
-
-
+    const handleNotComplete = (item) => {
+        dispatch(removeDone(item));
+    };
+    const handleDeleteAll = (item) => {
+        dispatch(deleteAll(item));
+    };
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then((res) => res.json())
+            .then((result) => {
+                dispatch(addAll(result));
+            });
+    }, [dispatch]);
   if (todoList.length > 0) {
 
     return (
       <>
+
         {repeat && <Message variant="danger">This note is already added</Message>}
         <ListGroup >
           {todoList.map((data,index) => (
@@ -42,7 +46,7 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
 
             >
               <Row >
-                  <Col lg={9} md={6} xs={6} style={{overflow:'hidden'}}>{index + 1} - {data.name} </Col>
+                  <Col lg={9} md={6} xs={6} style={{overflow:'hidden'}}> {index + 1} - {data.title} </Col>
 
                 {editFormVisibility === false && (
                   <>
@@ -51,14 +55,14 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
                     {data.complete === true ? (
                       <Button
                         variant='dark'
-                        onClick={() => handleNotComplete(data.name)}
+                        onClick={() => handleNotComplete(data.title)}
                       >
                        <i className="fa-solid fa-check"></i>
                       </Button>
                     ) : (
                       <Button
                         variant='primary'
-                        onClick={() => handleComplete(data.name)}
+                        onClick={() => handleComplete(data.title)}
                       >
                         <i className="fa-solid fa-xmark"></i>
                       </Button>
@@ -118,4 +122,4 @@ const TodoListList = ({handleEditClick, editFormVisibility}) => {
   }
 };
 
-export default TodoListList;
+export default TodoList;

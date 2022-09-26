@@ -1,11 +1,20 @@
 
-import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_EDIT_TODO} from '../../constants/ListConstants';
+import { LIST_REMOVE, LIST_ADD, LIST_ADD_DONE, LIST_REMOVE_DONE ,LIST_DELETE_ALL,LIST_EDIT_TODO, LIST_ALL} from '../../constants/ListConstants';
 
 export const listReducer = (state = { todoList: [], repeat: false }, action) => {
   switch (action.type) {
+    case  LIST_ALL:{
+
+
+      return {
+        ...state,
+        todoList: [...action.payload]
+      };
+    }
     case LIST_ADD:
+      console.log("PAYLOAD",action.payload);
       const newList = action.payload;
-      const checkName = state.todoList.find(x => x.name === action.payload.name)
+      const checkName = state.todoList.find(x => x.title === action.payload.title)
       if(!checkName) {
         return {
           ...state,
@@ -26,17 +35,17 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
       };
 
     case LIST_ADD_DONE:
-      const existNote = state.todoList.find(x => x.name === action.payload.name)
+      const existNote = state.todoList.find(x => x.title === action.payload.title)
       return {
         ...state,
-        todoList: state.todoList.map((x) => x.name === existNote.name ? action.payload : x) //replace that todoList.complete to true
+        todoList: state.todoList.map((x) => x.title === existNote.title ? action.payload : x) //replace that todoList.complete to true
       }
 
     case LIST_REMOVE_DONE:
-      const unCompleteNote = state.todoList.find(x => x.name === action.payload.name)
+      const unCompleteNote = state.todoList.find(x => x.title === action.payload.title)
       return {
         ...state,
-        todoList: state.todoList.map((x) => x.name === unCompleteNote.name ? action.payload : x) //replace that todoList.complete to true
+        todoList: state.todoList.map((x) => x.title === unCompleteNote.title ? action.payload : x) //replace that todoList.complete to true
       }
     case LIST_DELETE_ALL:
       return {
@@ -45,25 +54,27 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
       };
 
     case LIST_EDIT_TODO: {
-      const checkNameEdit = state.todoList.find((x) => x.name === action.payload.name);
-      if(checkNameEdit) {
+      const checkNameUpdate = state.todoList.find(x => x.title === action.payload.title)
+      if(checkNameUpdate){
         return {
           ...state,
-          repeat: true,
+          repeat: true
         }
-     } else {
-      const newTodoList = state.todoList.map((data) => {
-        if(data.id === action.payload.id) {
-          return action.payload;
+
+      }
+      else{
+        const newTodoList = state.todoList.map((data) => {
+          if(data.id === action.payload.id) {
+            return action.payload;
+          }
+          return data;
+        })
+        return {
+          ...state,
+          todoList:newTodoList,
         }
-        return data;
-      })
-      return {
-        ...state,
-        todoList:newTodoList,
       }
     }
-  }
 
     default:
       return state;
