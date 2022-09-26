@@ -21,13 +21,13 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1 className='text-info text-center'>To Do App</h1>
+      <h1 className='text-info text-center'>Todo App</h1>
       <Card>
         <TodoListForm setEditFormVisibility = {setEditFormVisibility} editFormVisibility={editFormVisibility} editTodo = {editTodo} cancelUpdate = {cancelUpdate} />
       </Card>
       <h1 style={{
         padding:'20px 0'
-      }} className='text-info text-center'>A ToDo List to Organize Your Work &amp;	Life</h1>
+      }} className='text-info text-center'>A Todo List to Organize Your Work &amp; Life</h1>
       <TodoListList  handleEditClick={handleEditClick} editFormVisibility={editFormVisibility} />
     </>
 

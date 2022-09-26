@@ -59,7 +59,7 @@ const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cance
                    required
                  />
                </Col>
-               <Col md={4}>
+               <Col className='d-grid gap-2' md={4}>
                  <Button type='submitted'>Add Item</Button>
                </Col>
              </Row>
@@ -83,11 +83,11 @@ const TodoListForm = ({setEditFormVisibility,editFormVisibility, editTodo, cance
               required
             />
           </Col>
-          <Col md={2}>
+          <Col className='d-grid gap-2' md={2}>
             <Button type='submitted'>UPDATE</Button>
           </Col>
           <Col md={2}>
-            <Button type='button' variant='success' onClick={cancelUpdate} >CANCEL</Button>
+            <Button className='d-grid gap-2' type='button' variant='success' onClick={cancelUpdate} >CANCEL</Button>
           </Col>
 
         </Row>
