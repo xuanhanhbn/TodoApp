@@ -45,6 +45,13 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
       };
 
     case LIST_EDIT_TODO: {
+      const checkNameEdit = state.todoList.find((x) => x.name === action.payload.name);
+      if(checkNameEdit) {
+        return {
+          ...state,
+          repeat: true,
+        }
+     } else {
       const newTodoList = state.todoList.map((data) => {
         if(data.id === action.payload.id) {
           return action.payload;
@@ -56,6 +63,7 @@ export const listReducer = (state = { todoList: [], repeat: false }, action) => 
         todoList:newTodoList,
       }
     }
+  }
 
     default:
       return state;
